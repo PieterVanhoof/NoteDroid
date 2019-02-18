@@ -1,11 +1,14 @@
 package ehb.be.notedroid;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.io.Serializable;
 
 import ehb.be.notedroid.Model.Note;
 import ehb.be.notedroid.Model.NoteDAO;
@@ -18,6 +21,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerTouchListener.ClickListener clickListener = new RecyclerTouchListener.ClickListener() {
         @Override
         public void onClick(View view, int position) {
+
+            Note n = NoteDAO.getInstance().getNoteLijst().get(position);
+
+            Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+            intent.putExtra("note" ,  n);
+            startActivity(intent);
 
         }
     };

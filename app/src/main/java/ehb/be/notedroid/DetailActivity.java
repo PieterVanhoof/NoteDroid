@@ -6,8 +6,11 @@ import android.widget.TextView;
 
 import java.util.Date;
 
+import ehb.be.notedroid.Model.Note;
+
 public class DetailActivity extends AppCompatActivity {
     private TextView tvDetailsTitel, tvDetailsContent, tvDetailsDatum ;
+    private Note geselecteerdeNote;
 
 
     @Override
@@ -18,6 +21,14 @@ public class DetailActivity extends AppCompatActivity {
         tvDetailsDatum = findViewById(R.id.tv_Details_Datum);
         tvDetailsTitel = findViewById(R.id.tv_Details_Titel);
         tvDetailsContent = findViewById(R.id.tv_Details_Content);
+
+        geselecteerdeNote = (Note) getIntent().getSerializableExtra("note");
+        tvDetailsTitel.setText(geselecteerdeNote.getTitle());
+        tvDetailsContent.setText(geselecteerdeNote.getNoteContent());
+        tvDetailsDatum.setText(geselecteerdeNote.getDatum().toString());
+
+
+
 
     }
 }
