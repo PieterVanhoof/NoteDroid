@@ -1,9 +1,15 @@
 package ehb.be.notedroid.Model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Note implements Serializable {
+    @PrimaryKey(autoGenerate = true)
+    private long id;
     private String Title, noteContent;
     private Date Datum;
 
@@ -38,6 +44,14 @@ public class Note implements Serializable {
 
     public void setDatum(Date datum) {
         Datum = datum;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

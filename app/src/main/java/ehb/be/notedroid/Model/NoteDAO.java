@@ -1,26 +1,26 @@
 package ehb.be.notedroid.Model;
 
-import android.widget.Adapter;
+import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.Query;
+import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
-public class NoteDAO {
-    private static final NoteDAO ourInstance = new NoteDAO();
-    private ArrayList<Note> noteList = new ArrayList<>();
+@Dao
+public interface NoteDAO {
 
-    public static NoteDAO getInstance() {
-        return ourInstance;
-    }
+    @Insert
+    void insertNote(Note jNote);
 
-    private NoteDAO() {
-        noteList.add(new Note("Reminder", "denk aan solicitaties",new Date()));
-        noteList.add(new Note("OP LANES","fizz & Yorrick", new Date()));
+    @Delete
+    void deleteNote(Note jNote);
 
-    }
-    public ArrayList<Note> getNoteLijst(){ return noteList; }
+    @Query("SELECT * FROM Note")
+    List<Note> selectAllNote();
 
-    public void addNote (Note newNote) { noteList.add(newNote);
 
-    }
+    @Query("SELECT * FROM Note WHere id = :id")
+    Note selectNoteByID(long id);
 }

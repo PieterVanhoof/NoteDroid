@@ -1,16 +1,19 @@
 package ehb.be.notedroid.recyclerUtils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import ehb.be.notedroid.Model.Note;
+import ehb.be.notedroid.Model.NoteDatabase;
 import ehb.be.notedroid.R;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.noteViewHolder> {
@@ -21,16 +24,18 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.noteViewHolder
         public noteViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setTag(this);
-            tvContent = itemView.findViewById(R.id.tv_content);
+            tvContent = itemView.findViewById(R.id.tv_add_content);
             tvTitel = itemView.findViewById(R.id.tv_titel);
             tvDate = itemView.findViewById(R.id.tv_Date);
 
         }
     }
         private ArrayList<Note> items;
+        private Context context;
 
-        public NoteAdapter(ArrayList<Note> items) {
+        public NoteAdapter(ArrayList<Note> items, Context context) {
             this.items = items;
+            this.context = context;
 
 
     }
@@ -58,5 +63,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.noteViewHolder
         return items.size();
     }
 
-
+    @Override
+    public long getItemId(int position) {
+        return items.get(position).getId();
+    }
 }
